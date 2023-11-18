@@ -8,86 +8,105 @@
   <style>
     .input-group {
       margin-bottom: 5px;
+      text-align: center; /* Center-align text within the input group */
     }
 
-    #craftsmenTable {
-      margin-bottom: 50px;;
+    .topic {
+      position: relative;
+    }
+
+    #whiteSpace {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 0; /* Set the height to 20px for a small white sector block */
+      background-color: white;
+      z-index: 1;
+    }
+
+    .topic img {
+      display: block;
+      /* Adjusted margin-top to create space below the small white sector block */
+      margin: 140px auto 0;
+    }
+
+
+    #mainText {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 12pt;
+      color: #17366F;
+      text-align: center;
+      padding-top: 10px;
+      font-style: italic; /* Make the text italic */
+    }
+
+    #inputContainer {
+      text-align: center; /* Center-align the input and button */
+    }
+
+    #introText {
+      color: #17366F;
+      font-weight: bold;
+      text-align: center;
+      padding-top:70px;
+    }
+
+    #query {
+      display:block;
+      /* Center horizontally */
+      /* Adjusted top margin */
+      margin: 10px auto 5px;
+      padding: 10px;
+      border-radius: 8px; /* Added border-radius for rounded edges */
+      border: 1px solid #ccc; /* Added border for better visibility */
+      width: 20%; /* Set width to 80% of the container */
+      box-sizing: border-box; /* Include padding and border in the width calculation */
+    }
+
+    #findButton {
+      display:block;
+      /* Center horizontally */
+      /* Add space between the input field and the button */
+      margin: 10px auto;
+      padding: 7px;
+      border-radius: 8px; /* Added border-radius for rounded edges */
+      border: 1px solid #ccc; /* Added border for better visibility */
     }
   </style>
 </head>
 
 <body>
-  <div class="input-group">
-    <input type="text" id="query" placeholder="Postal Code">
-    <button onclick="sendQuery()">Find Craftsmen by postalcode</button>
-  </div>
+<div class="topic">
+  <div id="whiteSpace"></div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Logo_CHECK24.png" alt="Postal Code Logo" width="120" height="">
+</div>
 
-  <!-- Table to display the craftsmen data -->
-  <table id="craftsmenTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Postal Code</th>
-        <th>Ranking</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Data rows will be inserted here -->
-    </tbody>
-  </table>
+<div id="mainText">Let's find your next favourite craftsman!</div>
 
-  <div class="input-group">
-    <input type="text" id="id" placeholder="ID">
-    <input type="text" id="rating" placeholder="Rating">
-    <button onclick="updateRating()">Update Rating</button>
-  </div>
+<div id="introText">But first...</div>
 
-  <script>
-    function sendQuery() {
-      const queryValue = document.getElementById('query').value;
-      fetch(`/craftsmen?postalcode=${encodeURIComponent(queryValue)}`)
-        .then(response => response.json())
-        .then(data => {
-          updateTable(data);
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    }
+<div class="input-group" id="inputContainer">
+  <label for="query"></label><input type="text" id="query" placeholder="Place your PLZ">
+  <button id="findButton" onclick="sendQuery()">Submit</button>
+</div>
 
-    function updateTable(data) {
-      const table = document.getElementById('craftsmenTable').getElementsByTagName('tbody')[0];
-      table.innerHTML = ''; 
 
-      data.craftsmen.forEach(item => {
-        let row = table.insertRow();
-        let cellId = row.insertCell(0);
-        let cellName = row.insertCell(1);
-        let cellPostalCode = row.insertCell(2);
-        let cellRanking = row.insertCell(3);
+<script>
+  function sendQuery() {
+    const queryValue = document.getElementById('query').value;
+    fetch(`/api/v1/serviceProvider?postalCode=${encodeURIComponent(queryValue)}`)
+            .then(response => response.json())
+            .then(data => {
+              updateTable(data);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+  }
 
-        cellId.textContent = item.id;
-        cellName.textContent = item.name; 
-        cellPostalCode.textContent = item.postalCode; 
-        cellRanking.textContent = item.rankingScore; 
-      });
-    }
-
-    function updateRating() {
-      const idValue = document.getElementById('id').value;
-      const ratingValue = document.getElementById('rating').value;
-
-      fetch(`/craftman/rating?id=${encodeURIComponent(idValue)}&rating=${encodeURIComponent(ratingValue)}`, {
-        method: 'PATCH'
-      })
-        .then(response => response.text())
-        .then(text => {
-          console.log(text);
-        })
-        .catch(err => {
-          console.error('Error:', err);
-        });
-    }
-  </script>
+  function updateTable(data) {
+    // Implement the logic to update your HTML table with the data from the Java backend
+    console.log(data);
+  }
+</script>
 </body>
 
 </html>

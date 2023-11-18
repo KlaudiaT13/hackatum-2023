@@ -19,7 +19,9 @@ public class ServiceController {
     }
 
     @GetMapping //annotate at RESTful endpoint (get something out from server)
-    public List<ServiceProvider> getServiceProvider() {
-        return serviceService.getServiceProviders();
+    public List<ServiceProvider> getServiceProvider(@RequestParam(name = "postalCode") String postalCode) {
+        // Use the postal code in your service logic
+        List<ServiceProvider> serviceProviderList = serviceService.getServiceProvidersByPostalCode(postalCode);
+        return serviceProviderList;
     }
 }
