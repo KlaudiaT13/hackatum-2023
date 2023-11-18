@@ -1,0 +1,170 @@
+<!-- results.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Add any necessary meta tags, styles, and scripts -->
+  <title>Service Provider Results</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #f2f2f2;
+    }
+
+    .logo {
+      max-width: 100px;
+      max-height: 100px;
+      /* Center the logo */
+      /* Adjust margin-left for centering */
+      margin: 0 auto 0 230px;
+    }
+
+    .search-icon,
+    .question-mark-icon,
+    .back-icon {
+      height: 30px;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    /* Different widths for different icons */
+    .search-icon {
+      width: 35px;
+    }
+
+    .back-icon {
+      width: 30px;
+    }
+
+    .results-container {
+      margin-top: 20px;
+      padding: 20px;
+      overflow-y: auto; /* Enable vertical scrolling */
+      max-height: calc(100vh - 100px); /* Set a maximum height to prevent it from expanding indefinitely */
+    }
+
+    .service-provider {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-provider img {
+      max-width: 80px;
+      max-height: 80px;
+      margin-right: 10px;
+      border-radius: 30%;
+    }
+
+    .service-provider-details {
+      flex-grow: 1; /* Allow details to take remaining space */
+    }
+
+    .service-provider h3 {
+      margin: 0;
+      font-size: 16px; /* Adjust font size as needed */
+    }
+
+    .service-provider p {
+      margin: 5px 0;
+    }
+
+    .rating {
+      font-size: 16px; /* Adjust font size as needed */
+      font-weight: bold;
+      color: #ffffff; /* White font color */
+      background-color: #17366F; /* Blue background color */
+      padding: 5px; /* Add padding for better appearance */
+      border-radius: 5px; /* Add border-radius for rounded edges */
+      font-family: 'Ubuntu', sans-serif; /* Ubuntu font style */
+      display: inline-block;
+    }
+
+    .show-more-button {
+      border: 1px solid transparent;
+      padding: 10px;
+      cursor: pointer;
+      text-align: center; /* Center the button */
+      margin: 0 auto; /* Center the button */
+    }
+  </style>
+</head>
+
+<body>
+<div class="header">
+  <button onclick="goBack()">
+    <img src="https://cdn-icons-png.flaticon.com/512/2099/2099190.png" alt="Back" class="back-icon">
+  </button>
+  <img src="https://i.pngimg.me/thumb/f/720/m2i8K9b1G6K9m2N4.jpg" alt="Search" class="search-icon">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Logo_CHECK24.png" alt="Logo" class="logo">
+  <button onclick="showInfo()">
+    <img src="https://banner2.cleanpng.com/20171217/a5b/question-mark-png-5a36990e505536.145839581513527566329.jpg"
+         alt="Question Mark" class="question-mark-icon">
+  </button>
+</div>
+
+<div class="results-container">
+  <!-- White space block before showing results -->
+  <div style="height: 20px;"></div>
+
+  <!-- Loop through service providers and display information -->
+  <!-- You can replace the static content with dynamic data from your JavaScript -->
+  <div class="service-provider">
+    <img src="service_provider_image_url_1" alt="Service Provider 1">
+    <div class="service-provider-details">
+      <h3>Name 1</h3>
+      <p class="rating">Rating: 9.5</p>
+      <p>Distance: 2.3 km</p>
+      <!-- Add other details as needed -->
+    </div>
+  </div>
+
+  <div class="service-provider">
+    <img src="service_provider_image_url_2" alt="Service Provider 2">
+    <div class="service-provider-details">
+      <h3>Name 2</h3>
+      <p class="rating">Rating: 8.2</p>
+      <p>Distance: 3.1 km</p>
+      <!-- Add other details as needed -->
+    </div>
+  </div>
+
+
+  <!-- Add more service providers as needed -->
+
+  <!-- Button to show more results -->
+  <div class="show-more-button" onclick="showMoreResults()">Show more?</div>
+</div>
+
+<script>
+  function goBack() {
+    // Implement the logic to go back to the search page
+    window.history.back();
+  }
+
+  function showInfo() {
+    // Implement the logic to show information about ranking system
+    // You can display a modal or any other UI element with information
+    alert("Information about ranking system");
+  }
+
+  function showMoreResults() {
+    // Implement the logic to load more results or dynamically fetch additional data
+    // Update the content in the "results-container"
+  }
+</script>
+</body>
+
+</html>
